@@ -13,9 +13,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +44,7 @@ public class MainActivity extends Activity {
         textView = (TextView) findViewById(R.id.mainText);
 
         Button buttonStart = (Button)findViewById(R.id.buttonClear);
-        buttonStart.setOnClickListener(startListener); // Register the onClick listener with the implementation abov
+        buttonStart.setOnClickListener(startListener3); // Register the onClick listener with the implementation abov
 
         Button buttonTwoHits = (Button)findViewById(R.id.buttonTwoHits);
         buttonTwoHits.setOnClickListener(startListener2); // Register the onClick listener with the implementation abov
@@ -101,6 +99,7 @@ public class MainActivity extends Activity {
             List<String> dataList = new ArrayList<String>();
             dataList.add(0, html);
             populateList(dataList);
+
         }
     };
 
@@ -113,6 +112,23 @@ public class MainActivity extends Activity {
 
             List<String> dataList = new ArrayList<String>();
             dataList.add(0, html);
+            populateList(dataList);
+        }
+    };
+
+    private OnClickListener startListener3 = new OnClickListener() {
+        public void onClick(View v) {
+            List <String> dataList = new ArrayList<String>();
+            ArrayList<String> files = new ArrayList<String>();
+            InputStream is = getResources().openRawResource(R.drawable.bot);
+            try {
+            //for(String filename : files){
+                dataList.add(0, MD5Checksum.getMD5Checksum(is));
+                System.err.println("The md5 hash " + MD5Checksum.getMD5Checksum(is));
+            //}
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             populateList(dataList);
         }
     };

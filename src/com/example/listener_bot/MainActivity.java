@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpGet;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -107,8 +108,8 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
 
 
-            String html = makeAGetRequest("http://10.146.69.203/index1.html");
-            String html1 = makeAGetRequest("http://10.146.69.203/arch.jpeg");
+            String html = makeAGetRequest("http://10.146.222.245/index1.html");
+            String html1 = makeAGetRequest("http://10.146.222.245/arch.jpeg");
 
             List<String> dataList = new ArrayList<String>();
             dataList.add(0, html);
@@ -119,13 +120,27 @@ public class MainActivity extends Activity {
     private OnClickListener startListener3 = new OnClickListener() {
         public void onClick(View v) {
             List <String> dataList = new ArrayList<String>();
-            ArrayList<String> files = new ArrayList<String>();
-            InputStream is = getResources().openRawResource(R.drawable.bot);
+            //ArrayList<Integer> files = new ArrayList<Integer>();
+            HashMap<String, String> urlHash = new HashMap<String, String>();
+//            files.add(R.drawable.bot);
+//            files.add(R.drawable.f1);
+//            files.add(R.drawable.f1);
+//            files.add(R.drawable.f2);
+//            files.add(R.drawable.f3);
+//            files.add(R.drawable.f1);
+
             try {
-            //for(String filename : files){
-                dataList.add(0, MD5Checksum.getMD5Checksum(is));
-                System.err.println("The md5 hash " + MD5Checksum.getMD5Checksum(is));
+                int count = 0;
+            //for(Integer filename : files){
+                InputStream is = getResources().openRawResource(R.drawable.bot);
+                String hsh = MD5Checksum.getMD5Checksum(is);
+                dataList.add(0, hsh);
+                //count++;
+                System.out.println("The md5 hash " + hsh);
+                //urlHash.put("some url" + count, MD5Checksum.getMD5Checksum(is));
             //}
+
+                makeAGetRequestWithHash("http://10.146.222.245/", urlHash);
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -155,6 +170,37 @@ public class MainActivity extends Activity {
        catch(Exception e){
 
        }
+        return html;
+    }
+
+    private String makeAGetRequestWithHash(String url, HashMap<String, String> urlHash){
+        System.out.println("MAKING REQUEST");
+        String html = "";
+        try{
+            HttpClient client = HttpClientFactory.getThreadSafeClient();
+            HttpGet request = new HttpGet(url);
+            request.addHeader("User-Agent","awesome thing from android app");
+            String headerString = "";
+            for(String imurl : urlHash.keySet()){
+                headerString += imurl+" "+urlHash.get(imurl)+"::";
+            }
+            request.addHeader("check-resource",headerString);
+            HttpResponse response = client.execute(request);
+
+
+            InputStream in = response.getEntity().getContent();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder str = new StringBuilder();
+            String line = null;
+            while((line = reader.readLine()) != null)
+            {
+                str.append(line);
+            }
+            in.close();
+            html = str.toString();}
+        catch(Exception e){
+
+        }
         return html;
     }
 

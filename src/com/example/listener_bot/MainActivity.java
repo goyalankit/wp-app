@@ -17,6 +17,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.http.Header;
 
 public class MainActivity extends Activity {
@@ -29,6 +31,7 @@ public class MainActivity extends Activity {
     private ListView mainListView;
     private Button buttonClear;
     private ArrayAdapter<String> listAdapter ;
+    private final String IPAddress = "http://10.146.229.248";
 
 
     /**
@@ -109,35 +112,9 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
 
 
-            String html = makeAGetRequest("http://10.146.166.96/index.html");
-            //String html1 = makeAGetRequest("http://10.146.222.245/arch.jpeg");
-
             List<String> dataList = new ArrayList<String>();
-            dataList.add(0, html);
-            populateList(dataList);
-        }
-    };
 
-    private OnClickListener startListener3 = new OnClickListener() {
-        public void onClick(View v) {
-
-            List <String> dataList = new ArrayList<String>();
-
-            ArrayList<Integer> files = new ArrayList<Integer>();
             HashMap<Integer,String> nameHash = new HashMap<Integer, String>();
-            HashMap<String, String> urlHash = new HashMap<String, String>();
-            files.add(R.drawable.bot);
-            files.add(R.drawable.f1);
-            files.add(R.drawable.f2);
-            files.add(R.drawable.f3);
-            files.add(R.drawable.img1);
-
-            files.add(R.drawable.bot1);
-            files.add(R.drawable.f4);
-            files.add(R.drawable.f5);
-            files.add(R.drawable.f6);
-            files.add(R.drawable.img2);
-
 
             nameHash.put(0,"bot.jpeg");
             nameHash.put(1,"f1.png");
@@ -151,7 +128,56 @@ public class MainActivity extends Activity {
             nameHash.put(8,"f6.png");
             nameHash.put(9,"img2.jpg");
 
+            try {
+                for(Map.Entry<Integer,String> entry:nameHash.entrySet()){
+                    String statusCode  = makeAGetRequest(IPAddress + ":4567/fetchB/" + entry.getValue());
+                    if(statusCode.contains("302"))
+                        dataList.add(0, "Resource Not modified");
+                    else if(statusCode.contains("200"))
+                        dataList.add(0, "Resource retrieved from server");
+                    else
+                        dataList.add(0, statusCode);
+                }
 
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            populateList(dataList);
+        }
+    };
+
+    private OnClickListener startListener3 = new OnClickListener() {
+        public void onClick(View v) {
+
+            List <String> dataList = new ArrayList<String>();
+
+            ArrayList<Integer> files = new ArrayList<Integer>();
+            HashMap<Integer,String> nameHash = new HashMap<Integer, String>();
+            HashMap<String, String> urlHash = new HashMap<String, String>();
+
+            files.add(R.drawable.bot);
+            files.add(R.drawable.f1);
+            files.add(R.drawable.f2);
+            files.add(R.drawable.f3);
+            files.add(R.drawable.img1);
+
+            files.add(R.drawable.bot1);
+            files.add(R.drawable.f4);
+            files.add(R.drawable.f5);
+            files.add(R.drawable.f6);
+            files.add(R.drawable.img2);
+
+            nameHash.put(0,"bot.jpeg");
+            nameHash.put(1,"f1.png");
+            nameHash.put(2,"f2.png");
+            nameHash.put(3,"f3.png");
+            nameHash.put(4,"img1.jpg");
+
+            nameHash.put(5,"bot1.jpeg");
+            nameHash.put(6,"f4.png");
+            nameHash.put(7,"f5.png");
+            nameHash.put(8,"f6.png");
+            nameHash.put(9,"img2.jpg");
 
             try {
                 int count = 0;
@@ -165,7 +191,7 @@ public class MainActivity extends Activity {
 
             }
 
-                String resourceStatus = makeAGetRequestWithHash("http://10.146.139.0:4567/fetch", urlHash);
+                String resourceStatus = makeAGetRequestWithHash(IPAddress + ":4567/fetch", urlHash);
                 dataList.add(0, resourceStatus);
 
                 //check the resources that need to be fetched
@@ -174,7 +200,7 @@ public class MainActivity extends Activity {
                 for(int i=0;i<statusValues.length;i++){
                     if(statusValues[i].equals("1")){
                         //fetch the corresponding resource
-                        String statusCode = makeAGetRequest("http://10.146.139.0/" + nameHash.get(i));
+                        String statusCode = makeAGetRequest(IPAddress + "/fetchB/" + nameHash.get(i));
                         if(statusCode.contains("200"))
                             dataList.add(0, "Request Successful");
                         else

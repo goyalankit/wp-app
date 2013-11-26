@@ -17,7 +17,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import org.apache.http.Header;
 
 public class MainActivity extends Activity {
 
@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
 
 
-            String html = makeAGetRequest("http://192.168.0.6/index.html");
+            String html = makeAGetRequest("http://10.146.166.96/index.html");
             //String html1 = makeAGetRequest("http://10.146.222.245/arch.jpeg");
 
             List<String> dataList = new ArrayList<String>();
@@ -124,12 +124,32 @@ public class MainActivity extends Activity {
             List <String> dataList = new ArrayList<String>();
 
             ArrayList<Integer> files = new ArrayList<Integer>();
+            HashMap<Integer,String> nameHash = new HashMap<Integer, String>();
             HashMap<String, String> urlHash = new HashMap<String, String>();
             files.add(R.drawable.bot);
             files.add(R.drawable.f1);
             files.add(R.drawable.f2);
             files.add(R.drawable.f3);
             files.add(R.drawable.img1);
+
+            files.add(R.drawable.bot1);
+            files.add(R.drawable.f4);
+            files.add(R.drawable.f5);
+            files.add(R.drawable.f6);
+            files.add(R.drawable.img2);
+
+
+            nameHash.put(0,"bot.jpeg");
+            nameHash.put(1,"f1.png");
+            nameHash.put(2,"f2.png");
+            nameHash.put(3,"f3.png");
+            nameHash.put(4,"img1.jpg");
+
+            nameHash.put(5,"bot1.jpeg");
+            nameHash.put(6,"f4.png");
+            nameHash.put(7,"f5.png");
+            nameHash.put(8,"f6.png");
+            nameHash.put(9,"img2.jpg");
 
 
 
@@ -139,24 +159,44 @@ public class MainActivity extends Activity {
                 InputStream is = getResources().openRawResource(filename);
                 String hsh = MD5Checksum.getMD5Checksum(is);
                 dataList.add(0, hsh);
-                count++;
                 //System.out.println("The md5 hash " + MD5Checksum.getMD5Checksum(is));
-                urlHash.put("image" + count, hsh);
+                urlHash.put("image:" + count, hsh);
+                count++;
 
             }
 
-                String html = makeAGetRequestWithHash("http://192.168.0.6/", urlHash);
-                dataList.add(0, html);
+                String resourceStatus = makeAGetRequestWithHash("http://10.146.139.0:4567/fetch", urlHash);
+                dataList.add(0, resourceStatus);
+
+                //check the resources that need to be fetched
+                String[] statusValues = resourceStatus.split(",");
+
+                for(int i=0;i<statusValues.length;i++){
+                    if(statusValues[i].equals("1")){
+                        //fetch the corresponding resource
+                        String statusCode = makeAGetRequest("http://10.146.139.0/" + nameHash.get(i));
+                        if(statusCode.contains("200"))
+                            dataList.add(0, "Request Successful");
+                        else
+                            dataList.add(0, "Request Failed");
+                    }
+                }
+
+
 
             }catch (Exception e){
                 e.printStackTrace();
             }
             populateList(dataList);
+
+
+
         }
     };
 
     private String makeAGetRequest(String url){
         String html = "";
+        Integer statusCode = 0;
         try{
         HttpClient client = HttpClientFactory.getThreadSafeClient();
         HttpGet request = new HttpGet(url);
@@ -165,6 +205,7 @@ public class MainActivity extends Activity {
 
 
         InputStream in = response.getEntity().getContent();
+        statusCode = response.getStatusLine().getStatusCode();
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         StringBuilder str = new StringBuilder();
         String line = null;
@@ -177,12 +218,16 @@ public class MainActivity extends Activity {
        catch(Exception e){
 
        }
-        return html;
+        return statusCode.toString();
     }
 
     private String makeAGetRequestWithHash(String url, HashMap<String, String> urlHash){
         System.out.println("MAKING REQUEST");
-        String html = "";
+
+        //String html = "";
+
+        String resourceStatus = "";
+
         try{
             HttpClient client = HttpClientFactory.getThreadSafeClient();
             HttpGet request = new HttpGet(url);
@@ -195,6 +240,15 @@ public class MainActivity extends Activity {
             HttpResponse response = client.execute(request);
 
 
+
+            Header[] hdrs = response.getHeaders("resource-status");
+
+            for(Header h:hdrs){
+                resourceStatus = h.getValue();
+                break;
+            }
+
+            /*
             InputStream in = response.getEntity().getContent();
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             StringBuilder str = new StringBuilder();
@@ -206,11 +260,13 @@ public class MainActivity extends Activity {
             in.close();
             html = str.toString();
             //System.out.println("Response: " + html);
+            */
+
         }
         catch(Exception e){
 
         }
-        return html;
+        return resourceStatus;
     }
 
 }

@@ -17,6 +17,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends Activity {
 
@@ -108,8 +109,8 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
 
 
-            String html = makeAGetRequest("http://10.146.222.245/index1.html");
-            String html1 = makeAGetRequest("http://10.146.222.245/arch.jpeg");
+            String html = makeAGetRequest("http://10.146.166.96/index.html");
+            //String html1 = makeAGetRequest("http://10.146.222.245/arch.jpeg");
 
             List<String> dataList = new ArrayList<String>();
             dataList.add(0, html);
@@ -119,15 +120,12 @@ public class MainActivity extends Activity {
 
     private OnClickListener startListener3 = new OnClickListener() {
         public void onClick(View v) {
+
             List <String> dataList = new ArrayList<String>();
+
             //ArrayList<Integer> files = new ArrayList<Integer>();
             HashMap<String, String> urlHash = new HashMap<String, String>();
 //            files.add(R.drawable.bot);
-//            files.add(R.drawable.f1);
-//            files.add(R.drawable.f1);
-//            files.add(R.drawable.f2);
-//            files.add(R.drawable.f3);
-//            files.add(R.drawable.f1);
 
             try {
                 int count = 0;
@@ -135,12 +133,16 @@ public class MainActivity extends Activity {
                 InputStream is = getResources().openRawResource(R.drawable.bot);
                 String hsh = MD5Checksum.getMD5Checksum(is);
                 dataList.add(0, hsh);
+
                 //count++;
-                System.out.println("The md5 hash " + hsh);
-                //urlHash.put("some url" + count, MD5Checksum.getMD5Checksum(is));
+                //System.out.println("The md5 hash " + MD5Checksum.getMD5Checksum(is));
+                urlHash.put("image" + count, hsh);
+
             //}
 
-                makeAGetRequestWithHash("http://10.146.222.245/", urlHash);
+                String html = makeAGetRequestWithHash("http://10.146.166.96/", urlHash);
+                dataList.add(0, html);
+
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -197,7 +199,9 @@ public class MainActivity extends Activity {
                 str.append(line);
             }
             in.close();
-            html = str.toString();}
+            html = str.toString();
+            //System.out.println("Response: " + html);
+        }
         catch(Exception e){
 
         }

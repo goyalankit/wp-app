@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
 
 
-            String html = makeAGetRequest("http://10.146.166.96/index.html");
+            String html = makeAGetRequest("http://192.168.0.6/index.html");
             //String html1 = makeAGetRequest("http://10.146.222.245/arch.jpeg");
 
             List<String> dataList = new ArrayList<String>();
@@ -123,24 +123,29 @@ public class MainActivity extends Activity {
 
             List <String> dataList = new ArrayList<String>();
 
-            //ArrayList<Integer> files = new ArrayList<Integer>();
+            ArrayList<Integer> files = new ArrayList<Integer>();
             HashMap<String, String> urlHash = new HashMap<String, String>();
-//            files.add(R.drawable.bot);
+            files.add(R.drawable.bot);
+            files.add(R.drawable.f1);
+            files.add(R.drawable.f2);
+            files.add(R.drawable.f3);
+            files.add(R.drawable.img1);
+
+
 
             try {
                 int count = 0;
-            //for(Integer filename : files){
-                InputStream is = getResources().openRawResource(R.drawable.bot);
+            for(Integer filename : files){
+                InputStream is = getResources().openRawResource(filename);
                 String hsh = MD5Checksum.getMD5Checksum(is);
                 dataList.add(0, hsh);
-
-                //count++;
+                count++;
                 //System.out.println("The md5 hash " + MD5Checksum.getMD5Checksum(is));
                 urlHash.put("image" + count, hsh);
 
-            //}
+            }
 
-                String html = makeAGetRequestWithHash("http://10.146.166.96/", urlHash);
+                String html = makeAGetRequestWithHash("http://192.168.0.6/", urlHash);
                 dataList.add(0, html);
 
             }catch (Exception e){

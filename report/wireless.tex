@@ -42,7 +42,31 @@
 %\CopyrightYear{2006}
 %\crdata{1-59593-343-3/06/0011}
 
+\newlength\myindent
+\setlength\myindent{1em}
+\newcommand\bindent{
+  \begingroup
+  \setlength{\itemindent}{\myindent}
+  \addtolength{\algorithmicindent}{\myindent}
+}
+\newcommand\eindent{\endgroup}
+
+\newlength\mysecindent
+\setlength\mysecindent{2em}
+\newcommand\quadindent{
+  \begingroup
+  \setlength{\itemindent}{\mysecindent}
+  \addtolength{\algorithmicindent}{\mysecindent}
+}
+\newcommand\quadeindent{\endgroup}
+
+
 \begin{document}
+
+\special{papersize=8.5in,11in}
+\setlength{\pdfpageheight}{\paperheight}
+\setlength{\pdfpagewidth}{\paperwidth}
+
 
 \maketitle
 
@@ -66,9 +90,12 @@ performance measures]
 
 \keywords{power aware http, network protocol}
 
+\medskip
 
 \section{Introduction}
   \label{sec:intro}
+
+\medskip
 
 The field of wireless communication has seen tremendous progress in recent years. Mobile devices are on the increase and being connected to the internet while on the move is essential in today’s society. One of the greatest constraints to realizing this goal is finite power supply which leads to short continuous operation time of mobile devices.
 
@@ -76,9 +103,11 @@ In this context, we first try to pinpoint the part of the HTTP protocol which le
 
 The rest of this paper is organized as follows: Section 2 highlights the background and related works of hypertext transfer protocol, transmission control protocol and power consumption issues over HTTP. Section 3 highlights the motivation behind this paper. Section 4 presents our proposed implementation of a power aware HTTP. Section 5 outlines the challenges faced during the course of the implementation. Section 6 outlines the results of our implementaion. Section 7 lists some other optimizations to optimize the power consumption of HTTP. Section 8 discusses related works. Section 9 includes our concluding remarks. Section 10 discusses the future work in the context of power optimziation of HTTP. Section 11 lists the references.
 
-\bigskip
+\medskip
 
 \section{Background}
+
+\medskip
 
 In this section we give a brief overview of the HTTP protocol. This is followed by an overview of the connection establishment and teardown in TCP. We then discuss the inefficiencies in the HTTP protocol as it is implemented today and the power consumption observed in HTTP.
 
@@ -134,21 +163,19 @@ Non-persistent TCP connections are enabled by default in HTTP/1.1 and is based o
 
 \subsection{Power Consumption in HTTP}
 
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.5\textwidth]%
-    {powerconsumption1.png}% picture filename
-  \caption{ Persistent HTTP Connection  }
-\end{SCfigure}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{powerconsumption1.png}
+\caption{Persistent HTTP Connection }
+\label{fig:sp_gd_mnist}
+\end{figure}
 
-
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.5\textwidth]%
-    {powerconsumption2.png}% picture filename
-  \caption{ Non-Persistent HTTP Connection  }
-\end{SCfigure}
-
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{powerconsumption2.png}
+\caption{Non-Persistent HTTP Connection }
+\label{fig:sp_gd_mnist}
+\end{figure}
 
 \bigskip
 
@@ -162,16 +189,16 @@ In HTTP/1.1, to load a cached webpage, the number of conditional GET requests eq
 
 We conducted a study by making web requests to some well-known and oft-visited websites. Unsurprisingly, we found that most of the resources on most of these cached webpages were seldom modified. Nevertheless, unnecessary HTTP calls were being made to attempt to fetch them again from the server.
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{proposal}
+\caption{Persistent HTTP Connection }
+\label{fig:sp_gd_mnist}
+\end{figure}
+
 For a page that is loaded from the cache, we propose an extension to HTTP which involves the addition of two new header fields to the HTTP GET request method. {\it check-resource} in the request header would enable the MD5 hash values for multiple resources to be set by the client. {\it resource-status} in the response header would enable the server to send a bitmap containing the status of resource change.
 
 With the extension in place, when a cached webpage is to be loaded, a single GET request will be made which will contain the MD5 hash of all the resources on the page. The server uses MD5 hash to match resources and checks whether the resources have been modified (one-by-one) and returns the status (modified/not modified) for every resource to the client. The client then makes GET requests for only the resources that have been modified.
-
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.5\textwidth]%
-    {proposal}% picture filename
-  \caption{ Proposal  }
-\end{SCfigure}
 
 \bigskip
 
@@ -184,6 +211,13 @@ We implemented our proposal at the application layer, over both wifi as well as 
 An additional header field {\it check-resource} is added to the single GET request made by the client. 
 The value of this field will be set to a list of key-value pairs of the resource-url and the corresponding MD5 hash.  When the client receives the modified/not modified status of the individual resources from the header of the response from the server, it will then make GET requests for only those resources that have not been modified.
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=50mm]{app2}
+\caption{Client Application }
+\label{fig:sp_gd_mnist}
+\end{figure}
+
 \bigskip
 
 \subsection{Server}
@@ -193,6 +227,8 @@ The server responds with an additional response header {\it resource-status} whi
 \bigskip
 
 \subsection{Technical Setup}
+
+The components used for the implementation are listed below.
 
 \subsubsection{Hardware}
 
@@ -211,6 +247,13 @@ The server responds with an additional response header {\it resource-status} whi
 
 5. Browser: Readings were also taken using Google Chrome and Firefox
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=70mm]{monitor.jpg}
+\caption{Monsoon Solutions’ Power Monitor and PowerTool software were used to capture power measurements for HTTP interactions on the Android device. }
+\label{fig:sp_gd_mnist}
+\end{figure}
+
 \bigskip
 
 \section{ Challenges}
@@ -225,51 +268,39 @@ Solution: To alleviate the effect of other applications, we considered the avera
 
 \bigskip
 
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.28\textwidth]%
-    {monitor.jpg}% picture filename
-  \caption{ Monsoon Solutions’ Power Monitor and PowerTool software were used to capture power measurements for HTTP interactions on the Android device.  }
-\end{SCfigure}
-
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.29\textwidth]%
-    {app2}% picture filename
-\end{SCfigure}
-
 \section{Results}
 
 \subsection{Measurements}
 
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.5\textwidth]%
-    {cellular_withoutheaders.png}% picture filename
-  \caption{ Without Headers (Cellular)  }
-\end{SCfigure}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{cellular_withoutheaders.png}
+\caption{Without Headers (Cellular) }
+\label{fig:sp_gd_mnist}
+\end{figure}
 
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.5\textwidth]%
-    {cellular_withheaders.png}% picture filename
-  \caption{ With Headers (Cellular)  }
-\end{SCfigure}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{cellular_withheaders.png}
+\caption{With Headers (Cellular) }
+\label{fig:sp_gd_mnist}
+\end{figure}
 
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.5\textwidth]%
-    {wifi_withoutheaders.png}% picture filename
-  \caption{ Without Headers (Wifi)  }
-\end{SCfigure}
+some text here
 
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.5\textwidth]%
-    {wifi_withheaders.png}% picture filename
-  \caption{ With Headers (Wifi)  }
-\end{SCfigure}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{wifi_withoutheaders.png}
+\caption{Without Headers (Wifi) }
+\label{fig:sp_gd_mnist}
+\end{figure}
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{wifi_withheaders.png}
+\caption{With Headers (Wifi) }
+\label{fig:sp_gd_mnist}
+\end{figure}
 
 \bigskip
 
@@ -292,11 +323,12 @@ We looked at some of the optimizations made by modern browsers. One of the optim
  
 Server logs in the figure shows that  as  soon as user starts typing, Chrome starts making HTTP requests for each typed character. This approach reduces latency but consumes a lot of power and wastes a lot of network resources. 
 
-\begin{SCfigure}
-  \centering
-  \includegraphics[width=0.5\textwidth]%
-    {chrome}% picture filename
-\end{SCfigure}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{chrome}
+\caption{Chrome URL Pre-Fetch}
+\label{fig:sp_gd_mnist}
+\end{figure}
 
 We may try to tweak the response of 404 with possible URL options to save power i.e In a 404 request, it should be possible for a server to specify the possible set of urls matching the pattern. This could considerably reduce the power consumption and latency. Of course security needs to be taken into account but this could simply be a better layer of optimization instead of blindly making HTTP requests on the URL being typed. 
 

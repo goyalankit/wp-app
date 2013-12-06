@@ -19,3 +19,9 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+
+# ignoring latex generated files
+*.aux
+*.log
+*.synctex.gz
+*.DS_Store

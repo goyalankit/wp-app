@@ -200,6 +200,24 @@ For a page that is loaded from the cache, we propose an extension to HTTP which 
 
 With the extension in place, when a cached webpage is to be loaded, a single GET request will be made which will contain the MD5 hash of all the resources on the page. The server uses MD5 hash to match resources and checks whether the resources have been modified (one-by-one) and returns the status (modified/not modified) for every resource to the client. The client then makes GET requests for only the resources that have been modified.
 
+\begin{SCfigure}
+  \centering
+  \includegraphics[width=0.5\textwidth]
+    {proposal}% picture filename
+  \caption{ Proposal  }
+\end{SCfigure}
+
+
+
+\begin{SCfigure}
+  \centering
+  \includegraphics[width=0.5\textwidth]
+    {avg_energy.png}% picture filename
+  \caption{ Without Headers (Cellular)  }
+\end{SCfigure}
+
+
+
 \bigskip
 
 \section{Implementation}
@@ -255,6 +273,20 @@ The components used for the implementation are listed below.
 \end{figure}
 
 \bigskip
+
+\begin{table}[htbp]
+\caption{Power consumption in mJ for different HTTP implementations.}
+\begin{tabular}{|r|r|r|r|}
+\hline
+\multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{Power-Aware HTTP} & \multicolumn{1}{l|}{Regular HTTP} & \multicolumn{1}{l|}{Difference} \\ \hline
+0 & 8813.55 & 5109.29 & 3704.26 \\ \hline
+1 & 22819.33 & 7077.08 & 15742.25 \\ \hline
+4 & 26546.05 & 10279.8 & 16266.25 \\ \hline
+6 & 32878.45 & 15107.92 & 17770.53 \\ \hline
+10 & 50532.2 & 55641.49 & -5109.29 \\ \hline
+\end{tabular}
+\label{}
+\end{table}
 
 \section{ Challenges}
 

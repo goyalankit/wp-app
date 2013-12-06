@@ -25,12 +25,12 @@
         <Button android:id="@+id/buttonClear"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="one link"/>
+                android:text="Power Aware HTTP/1.1"/>
 
         <Button android:id="@+id/buttonTwoHits"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="link and image"/>
+                android:text="Regular HTTP/1.1"/>
 
 
 

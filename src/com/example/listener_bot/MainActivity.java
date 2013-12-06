@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
     private ListView mainListView;
     private Button buttonClear;
     private ArrayAdapter<String> listAdapter ;
-    private final String IPAddress = "http://10.146.229.248";
+    private final String IPAddress = "http://6c0d0512.ngrok.com";
 
 
     /**
@@ -116,25 +116,40 @@ public class MainActivity extends Activity {
 
             HashMap<Integer,String> nameHash = new HashMap<Integer, String>();
 
-            nameHash.put(0,"bot.jpeg");
-            nameHash.put(1,"f1.png");
-            nameHash.put(2,"f2.png");
-            nameHash.put(3,"f3.png");
-            nameHash.put(4,"img1.jpg");
+            nameHash.put(0,"f1.jpg");
+            nameHash.put(1,"f2.jpg");
+            nameHash.put(2,"f3.jpg");
+            nameHash.put(3,"f4.jpg");
+            nameHash.put(4,"f5.jpg");
 
-            nameHash.put(5,"bot1.jpeg");
-            nameHash.put(6,"f4.png");
-            nameHash.put(7,"f5.png");
-            nameHash.put(8,"f6.png");
-            nameHash.put(9,"img2.jpg");
+            nameHash.put(5,"f6.jpg");
+            nameHash.put(6,"f7.jpg");
+            nameHash.put(7,"f8.jpg");
+            nameHash.put(8,"f9.jpg");
+            nameHash.put(9,"f10.jpg");
+
+            /*
+            nameHash.put(10,"bot2.jpeg");
+            nameHash.put(11,"f7.png");
+            nameHash.put(12,"f8.png");
+            nameHash.put(13,"f9.png");
+            nameHash.put(14,"img3.jpg");
+
+            nameHash.put(15,"bot3.jpeg");
+            nameHash.put(16,"f10.png");
+            nameHash.put(17,"f11.png");
+            nameHash.put(18,"f12.png");
+            nameHash.put(19,"img4.jpg");
+            */
+
 
             try {
                 for(Map.Entry<Integer,String> entry:nameHash.entrySet()){
-                    String statusCode  = makeAGetRequest(IPAddress + ":4567/fetchB/" + entry.getValue());
+                    String statusCode  = makeAGetRequest(IPAddress + "/fetchB/" + entry.getValue());
                     if(statusCode.contains("302"))
-                        dataList.add(0, "Resource Not modified");
+                        dataList.add(0, "302: Resource Not modified");
                     else if(statusCode.contains("200"))
-                        dataList.add(0, "Resource retrieved from server");
+                        dataList.add(0, "200: Resource retrieved from server");
                     else
                         dataList.add(0, statusCode);
                 }
@@ -155,29 +170,57 @@ public class MainActivity extends Activity {
             HashMap<Integer,String> nameHash = new HashMap<Integer, String>();
             HashMap<String, String> urlHash = new HashMap<String, String>();
 
-            files.add(R.drawable.bot);
             files.add(R.drawable.f1);
             files.add(R.drawable.f2);
             files.add(R.drawable.f3);
-            files.add(R.drawable.img1);
-
-            files.add(R.drawable.bot1);
             files.add(R.drawable.f4);
             files.add(R.drawable.f5);
+
             files.add(R.drawable.f6);
-            files.add(R.drawable.img2);
+            files.add(R.drawable.f7);
+            files.add(R.drawable.f8);
+            files.add(R.drawable.f9);
+            files.add(R.drawable.f10);
 
-            nameHash.put(0,"bot.jpeg");
-            nameHash.put(1,"f1.png");
-            nameHash.put(2,"f2.png");
-            nameHash.put(3,"f3.png");
-            nameHash.put(4,"img1.jpg");
+            /*
+            files.add(R.drawable.bot2);
+            files.add(R.drawable.f7);
+            files.add(R.drawable.f8);
+            files.add(R.drawable.f9);
+            files.add(R.drawable.img3);
 
-            nameHash.put(5,"bot1.jpeg");
-            nameHash.put(6,"f4.png");
-            nameHash.put(7,"f5.png");
-            nameHash.put(8,"f6.png");
-            nameHash.put(9,"img2.jpg");
+            files.add(R.drawable.bot3);
+            files.add(R.drawable.f10);
+            files.add(R.drawable.f11);
+            files.add(R.drawable.f12);
+            files.add(R.drawable.img4);
+            */
+
+            nameHash.put(0,"f1.jpg");
+            nameHash.put(1,"f2.jpg");
+            nameHash.put(2,"f3.jpg");
+            nameHash.put(3,"f4.jpg");
+            nameHash.put(4,"f5.jpg");
+
+            nameHash.put(5,"f6.jpg");
+            nameHash.put(6,"f7.jpg");
+            nameHash.put(7,"f8.jpg");
+            nameHash.put(8,"f9.jpg");
+            nameHash.put(9,"f10.jpg");
+
+            /*
+            nameHash.put(10,"bot2.jpeg");
+            nameHash.put(11,"f7.png");
+            nameHash.put(12,"f8.png");
+            nameHash.put(13,"f9.png");
+            nameHash.put(14,"img3.jpg");
+
+            nameHash.put(15,"bot3.jpeg");
+            nameHash.put(16,"f10.png");
+            nameHash.put(17,"f11.png");
+            nameHash.put(18,"f12.png");
+            nameHash.put(19,"img4.jpg");
+            */
 
             try {
                 int count = 0;
@@ -191,7 +234,7 @@ public class MainActivity extends Activity {
 
             }
 
-                String resourceStatus = makeAGetRequestWithHash(IPAddress + ":4567/fetch", urlHash);
+                String resourceStatus = makeAGetRequestWithHash(IPAddress + "/fetch", urlHash);
                 dataList.add(0, resourceStatus);
 
                 //check the resources that need to be fetched
@@ -200,11 +243,11 @@ public class MainActivity extends Activity {
                 for(int i=0;i<statusValues.length;i++){
                     if(statusValues[i].equals("1")){
                         //fetch the corresponding resource
-                        String statusCode = makeAGetRequest(IPAddress + "/fetchB/" + nameHash.get(i));
+                        String statusCode = makeAGetRequest("http://7caa862e.ngrok.com" + "/" + nameHash.get(i));
                         if(statusCode.contains("200"))
-                            dataList.add(0, "Request Successful");
+                            dataList.add(0, "200: Request Successful");
                         else
-                            dataList.add(0, "Request Failed");
+                            dataList.add(0, nameHash.get(i) + " " + statusCode + ":Request Failed");
                     }
                 }
 

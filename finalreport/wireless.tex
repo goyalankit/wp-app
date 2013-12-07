@@ -210,12 +210,6 @@ The value of this field will be set to a list of key-value pairs of the resource
 
 We implemented a native android application (shown in figure 4.) that allowed us to make a request for multiple resources with the new header, \it{check-resource} \rm. 
 
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=50mm]{app2}
-\caption{Client Application }
-\label{fig:sp_gd_mnist}
-\end{figure}
 
 \subsection{Server}
 
@@ -321,23 +315,26 @@ Note that the relative improvement of Power-Aware HTTP is significantly less in 
 
 
 
+
+\subsection{Best Case}
+
+In this more likely case, for a cached webpage with n resources, out of which m (m \textless \textless n) resources have been modified: regular HTTP makes {\it n} GET requests. Power-aware HTTP, on the other hand, makes {\it (1+m)} GET requests.
+
+
+
+\subsection{Worst Case}
+
+For a cached webpage with n resources, out of which all n resources have been modified, regular HTTP
+makes {\it n} GET requests whle power-aware HTTP makes {\it (1+n)} GET requests.
+
+
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=80mm]{chrome}
 \caption{Chrome URL Pre-Fetch}
 \label{fig:sp_gd_mnist}
 \end{figure}
-
-
-
-\subsection{Best Case}
-
-In this more likely case, for a cached webpage with n resources, out of which m (m \textless \textless n) resources have been modified: regular HTTP makes {\it n} GET requests. Power-aware HTTP, on the other hand, makes {\it (1+m)} GET requests.
-
-\subsection{Worst Case}
-
-For a cached webpage with n resources, out of which all n resources have been modified, regular HTTP
-makes {\it n} GET requests whle power-aware HTTP makes {\it (1+n)} GET requests.
 
 
 

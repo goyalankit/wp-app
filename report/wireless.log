@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  6 DEC 2013 11:33
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  6 DEC 2013 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -130,26 +130,63 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 \SC@tempdimb=\dimen112
 \c@SC@C=\count95
 \SC@BOX=\box27
-) (./wireless.aux)
+)
+\myindent=\skip43
+\mysecindent=\skip44
+ (./wireless.aux
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+
+LaTeX Warning: Label `fig:sp_gd_mnist' multiply defined.
+
+)
 \openout1 = `wireless.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 45.
-LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 45
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 64.
+LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 64
 .
  (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
 
 (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -221,210 +258,246 @@ Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 126.
 )
-\CenteringLeftskip=\skip43
-\RaggedLeftLeftskip=\skip44
-\RaggedRightLeftskip=\skip45
-\CenteringRightskip=\skip46
-\RaggedLeftRightskip=\skip47
-\RaggedRightRightskip=\skip48
-\CenteringParfillskip=\skip49
-\RaggedLeftParfillskip=\skip50
-\RaggedRightParfillskip=\skip51
-\JustifyingParfillskip=\skip52
-\CenteringParindent=\skip53
-\RaggedLeftParindent=\skip54
-\RaggedRightParindent=\skip55
-\JustifyingParindent=\skip56
+\CenteringLeftskip=\skip45
+\RaggedLeftLeftskip=\skip46
+\RaggedRightLeftskip=\skip47
+\CenteringRightskip=\skip48
+\RaggedLeftRightskip=\skip49
+\RaggedRightRightskip=\skip50
+\CenteringParfillskip=\skip51
+\RaggedLeftParfillskip=\skip52
+\RaggedRightParfillskip=\skip53
+\JustifyingParfillskip=\skip54
+\CenteringParindent=\skip55
+\RaggedLeftParindent=\skip56
+\RaggedRightParindent=\skip57
+\JustifyingParindent=\skip58
 )
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 47.
-LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 47.
+(Font)              scaled to size 8.09995pt on input line 71.
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 71.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 8.99994pt on input line 47.
+(Font)              scaled to size 8.09995pt on input line 71.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <18> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 47.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 71.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 16.19989pt on input line 47.
+(Font)              scaled to size 16.19989pt on input line 71.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 12.59991pt on input line 47.
+(Font)              scaled to size 12.59991pt on input line 71.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 10.79993pt on input line 47.
-LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 47
+(Font)              scaled to size 10.79993pt on input line 71.
+LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 71
 .
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 47
+LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 71
 .
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+psycm on input line 47
+LaTeX Font Info:    Try loading font information for OMX+psycm on input line 71
 .
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 47.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 71.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 47.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 71.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 47.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 71.
+LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 71.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
  [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
+Non-PDF special ignored!
+
 ]
-Underfull \hbox (badness 2846) in paragraph at lines 115--116
-[]\OT1/ptm/m/n/10 Since the TCP spec-i-fi-ca-tion re-quires the host that
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
+[]\OT1/ptm/m/n/9 Since the TCP spec-i-fi-ca-tion re-quires the host that
+ []
+
+
+Underfull \hbox (badness 2302) in paragraph at lines 144--145
+\OT1/ptm/m/n/9 closed/terminated the con-nec-tion to re-tain in-for-ma-tion abo
+ut
+ []
+
+
+Underfull \hbox (badness 1038) in paragraph at lines 144--145
+\OT1/ptm/m/n/9 that con-nec-tion for four min-utes [3], a client (un-nec-es-sar
+-ily)
  []
 
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
-[2] <proposal.png, id=14, 420.57124pt x 425.59pt>
+
+Underfull \hbox (badness 1077) in paragraph at lines 160--161
+[]\OT1/ptm/m/n/9 Non-persistent TCP con-nec-tions are en-abled by de-fault in
+ []
+
+<powerconsumption1.png, id=11, 286.06876pt x 144.54pt>
+File: powerconsumption1.png Graphic file (type png)
+
+<use powerconsumption1.png>
+Package pdftex.def Info: powerconsumption1.png used on input line 168.
+(pdftex.def)             Requested size: 227.62204pt x 115.01018pt.
+
+<powerconsumption2.png, id=12, 287.0725pt x 156.585pt>
+File: powerconsumption2.png Graphic file (type png)
+
+<use powerconsumption2.png>
+Package pdftex.def Info: powerconsumption2.png used on input line 175.
+(pdftex.def)             Requested size: 227.62204pt x 124.15953pt.
+ <proposal.png, id=13, 420.57124pt x 425.59pt>
 File: proposal.png Graphic file (type png)
- <use proposal.png>
-Package pdftex.def Info: proposal.png used on input line 156.
-(pdftex.def)             Requested size: 252.94499pt x 255.96638pt.
 
-Overfull \hbox (61.07437pt too wide) in paragraph at lines 158--158
-[][]\OT1/ptm/b/n/10 .
+<use proposal.png>
+Package pdftex.def Info: proposal.png used on input line 194.
+(pdftex.def)             Requested size: 227.62204pt x 230.34117pt.
+ [2 <./powerconsumption1.png> <./powerconsumption2.png>]
+<avg_energy_cell.png, id=17, 602.25pt x 372.39125pt>
+File: avg_energy_cell.png Graphic file (type png)
+ <use avg_energy_cell.png>
+Package pdftex.def Info: avg_energy_cell.png used on input line 207.
+(pdftex.def)             Requested size: 252.94499pt x 156.40324pt.
+
+Overfull \hbox (57.25937pt too wide) in paragraph at lines 209--209
+[][]\OT1/ptm/b/n/9 .
  []
 
 
-Overfull \hbox (60.52432pt too wide) in paragraph at lines 158--158
-|\OT1/ptm/b/n/10 Proposal| 
- []
-
-<monitor.jpg, id=15, 3276.24pt x 2457.18pt>
-File: monitor.jpg Graphic file (type jpg)
- <use monitor.jpg>
-Package pdftex.def Info: monitor.jpg used on input line 215.
-(pdftex.def)             Requested size: 141.64857pt x 106.21909pt.
-Missing character: There is no â in font ptmb7t!
-Missing character: There is no € in font ptmb7t!
-Missing character: There is no ™ in font ptmb7t!
-Missing character: There is no â in font ptmb7t!
-Missing character: There is no € in font ptmb7t!
-Missing character: There is no ™ in font ptmb7t!
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--217
-\OT1/ptm/b/n/10 So-lu-tions Power
+Overfull \hbox (54.76637pt too wide) in paragraph at lines 209--209
+|\OT1/ptm/b/n/9 Without
  []
 
 
-Underfull \hbox (badness 1902) in paragraph at lines 217--217
-\OT1/ptm/b/n/10 Tool soft-ware were
+Overfull \hbox (46.42336pt too wide) in paragraph at lines 209--209
+\OT1/ptm/b/n/9 Head-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--217
-\OT1/ptm/b/n/10 used to cap-ture
+Overfull \hbox (34.41739pt too wide) in paragraph at lines 209--209
+\OT1/ptm/b/n/9 ers
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--217
-\OT1/ptm/b/n/10 power mea-sure-
+Overfull \hbox (60.41805pt too wide) in paragraph at lines 209--209
+\OT1/ptm/b/n/9 (Cellular)| 
  []
 
+<avg_energy_wifi.png, id=18, 602.25pt x 372.39125pt>
+File: avg_energy_wifi.png Graphic file (type png)
+ <use avg_energy_wifi.png>
+Package pdftex.def Info: avg_energy_wifi.png used on input line 213.
+(pdftex.def)             Requested size: 227.62204pt x 140.74872pt.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 220.
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--217
-\OT1/ptm/b/n/10 ments for HTTP
- []
-
-
-Underfull \hbox (badness 2635) in paragraph at lines 217--217
-\OT1/ptm/b/n/10 in-ter-ac-tions on the
- []
-
-<app2.png, id=16, 795.97375pt x 561.09625pt>
+<app2.png, id=19, 335.2525pt x 495.8525pt>
 File: app2.png Graphic file (type png)
  <use app2.png>
-Package pdftex.def Info: app2.png used on input line 222.
-(pdftex.def)             Requested size: 252.94499pt x 178.30446pt.
+Package pdftex.def Info: app2.png used on input line 246.
+(pdftex.def)             Requested size: 142.26378pt x 210.41296pt.
 
-Overfull \hbox (61.07437pt too wide) in paragraph at lines 223--223
-[][]\OT1/ptm/b/n/10 .
+Underfull \hbox (badness 3019) in paragraph at lines 255--256
+[]\OT1/ptm/m/n/9 The server re-sponds with an ad-di-tional re-sponse header
  []
 
+[3 <./proposal.png> <./avg_energy_cell.png (PNG copy)> <./avg_energy_wifi.png (
+PNG copy)> <./app2.png>] <monitor.jpg, id=25, 3276.24pt x 2457.18pt>
+File: monitor.jpg Graphic file (type jpg)
 
-Overfull \hbox (22.9246pt too wide) in paragraph at lines 223--223
-|| 
- []
+<use monitor.jpg>
+Package pdftex.def Info: monitor.jpg used on input line 282.
+(pdftex.def)             Requested size: 199.16928pt x 149.3741pt.
+Missing character: There is no â in font ptmb7t!
+Missing character: There is no € in font ptmb7t!
+Missing character: There is no ™ in font ptmb7t!
+Missing character: There is no â in font ptmb7t!
+Missing character: There is no € in font ptmb7t!
+Missing character: There is no ™ in font ptmb7t!
 
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 233.
+<cellular_withoutheaders.png, id=26, 693.59125pt x 162.6075pt>
+File: cellular_withoutheaders.png Graphic file (type png)
+
+<use cellular_withoutheaders.png>
+Package pdftex.def Info: cellular_withoutheaders.png used on input line 321.
+(pdftex.def)             Requested size: 227.62204pt x 53.36288pt.
+
+<cellular_withheaders.png, id=27, 697.60625pt x 165.61874pt>
+File: cellular_withheaders.png Graphic file (type png)
+
+<use cellular_withheaders.png>
+Package pdftex.def Info: cellular_withheaders.png used on input line 328.
+(pdftex.def)             Requested size: 227.62204pt x 54.04025pt.
+
+<wifi_withoutheaders.png, id=28, 672.5125pt x 141.52875pt>
+File: wifi_withoutheaders.png Graphic file (type png)
+
+<use wifi_withoutheaders.png>
+Package pdftex.def Info: wifi_withoutheaders.png used on input line 337.
+(pdftex.def)             Requested size: 227.62204pt x 47.90317pt.
+
+<wifi_withheaders.png, id=29, 671.50874pt x 106.3975pt>
+File: wifi_withheaders.png Graphic file (type png)
+
+<use wifi_withheaders.png>
+Package pdftex.def Info: wifi_withheaders.png used on input line 344.
+(pdftex.def)             Requested size: 227.62204pt x 36.06589pt.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 353.
+
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
-LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 233.
- [3 <./proposal.png> <./monitor.jpg>] <chrome.png, id=20, 340.27126pt x 162.607
-5pt>
+LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 353.
+
+<chrome.png, id=30, 340.27126pt x 162.6075pt>
 File: chrome.png Graphic file (type png)
-
-<use chrome.png>
-Package pdftex.def Info: chrome.png used on input line 253.
-(pdftex.def)             Requested size: 252.94499pt x 120.876pt.
-
-Overfull \hbox (61.07437pt too wide) in paragraph at lines 254--254
-[][]\OT1/ptm/b/n/10 .
- []
-
-
-Overfull \hbox (22.9246pt too wide) in paragraph at lines 254--254
-|| 
- []
-
+ <use chrome.png>
+Package pdftex.def Info: chrome.png used on input line 372.
+(pdftex.def)             Requested size: 227.62204pt x 108.77525pt.
+ [4 <./monitor.jpg> <./cellular_withoutheaders.png> <./cellular_withheaders.png
+> <./wifi_withoutheaders.png> <./wifi_withheaders.png>]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
+ [5 <./chrome.png>] (./wireless.aux)
 
-Underfull \hbox (badness 1242) in paragraph at lines 284--289
-[]\OT1/ptm/m/n/10 [1] Venkata N. Pad-man-ab-han and Jef-frey C. Mogul
- []
+LaTeX Warning: There were multiply-defined labels.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 284--289
-\OT1/ptm/m/n/10 [5] SPDY: An ex-per-i-men-tal pro-to-col for a
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 284--289
-\OT1/ptm/m/n/10 faster web [White pa-per]. Re-trieved from
- []
-
-[4 <./app2.png> <./chrome.png>] [5
-
-] (./wireless.aux) ) 
+ ) 
 Here is how much of TeX's memory you used:
- 2153 strings out of 493315
- 30936 string characters out of 6137904
- 93654 words of memory out of 5000000
- 5561 multiletter control sequences out of 15000+600000
- 28771 words of font info for 54 fonts, out of 8000000 for 9000
+ 2208 strings out of 493315
+ 32136 string characters out of 6137904
+ 94729 words of memory out of 5000000
+ 5607 multiletter control sequences out of 15000+600000
+ 31849 words of font info for 61 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,10n,23p,906b,317s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r
-.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.
-pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></u
-sr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/loca
-l/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/
-2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf
--dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on wireless.pdf (5 pages, 2129044 bytes).
+ 38i,10n,23p,906b,318s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/tex
+live/2013/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/20
+13/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/texm
+f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fon
+ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/u
+rw/times/utmri8a.pfb>
+Output written on wireless.pdf (5 pages, 2538662 bytes).
 PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
+ 59 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

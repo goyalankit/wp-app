@@ -347,7 +347,7 @@ We looked at some of the optimizations made by modern browsers. One of the optim
  
 Server logs in the figure 8. shows that as soon as user starts typing, Chrome starts making HTTP requests for each typed character. This approach reduces latency but consumes a lot of power and wastes a lot of network resources. 
 
-Solution: We try to address this problem by making server give hint to client to prevent premature fetching of urls by modifying the response of 404. We return the possible URL options matching the pattern in an additional header field. In case of cellular network, we found that the energy consumption was less by 38.5\%.
+Solution: We try to address this problem by making server give hint to client to prevent premature fetching of urls by modifying the response of 404. We return the possible URL options matching the pattern in an additional header field. In case of cellular network, we found that the energy consumption was less by 15.8\%.
 
 
 \begin{figure}[ht!]

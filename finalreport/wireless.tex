@@ -79,15 +79,11 @@
 
 \end{abstract}
 
-\category{CR-number}{subcategory}{third-level}
-
 % general terms are not compulsory anymore, 
 % you may leave them out
-\terms
-term1, term2
 
 \keywords
-keyword1, keyword2
+Network Protocol, HTTP, TCP, Power Aware, Wireless Networking
 
 \section{Introduction}
 
@@ -223,7 +219,7 @@ The components used for the implementation are listed below.
 \subsubsection{Hardware}
 
 \noindent1. Power Monitor by Monsoon Solutions. \newline
-2. Mobile Device: HTC desire one running Android 4.2.2 (fig. 5)
+2. Mobile Device: HTC desire one running Android 4.2.2 
 
 \subsubsection{Software}
 
@@ -258,7 +254,7 @@ b) There are lot of background processes in an Android device that consume power
 We evaluated the performance of Regular HTTP and Power-Aware HTTP over 802.11 and Cellular network for different number of modified resources.  
 
 \subsection{Power consumption in Cellular}
-Table 2. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over a cellular network for different number of modified resources. It can be seen from Figure 6, that the Power-Aware HTTP consumes much less power than the Regular HTTP in case the number of modified resources are less. Our solution performs worse than Regular HTTP only in case when all the resources are modified, but in a typical webpage this is not a common scenario as seen in Table 1. In our experiments we observed an average improvement of 112.3\% in power consumption assuming probability of a resource being modified to be 1/2 for all the 10 resources we tested for.
+Table 2. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over a cellular network for different number of modified resources. It can be seen from Figure 5, that the Power-Aware HTTP consumes much less power than the Regular HTTP in case the number of modified resources are less. Our solution performs worse than Regular HTTP only in case when all the resources are modified, but in a typical webpage this is not a common scenario as seen in Table 1. In our experiments we observed an average improvement of 112.3\% in power consumption assuming probability of a resource being modified to be 1/2 for all the 10 resources we tested for.
 
 \begin{table}[htbp]
 \centering
@@ -285,10 +281,10 @@ Table 2. shows the average energy consumed by both Power-Aware HTTP and Regular 
 \end{figure}
 
 \subsection{Power consumption in 802.11}
-Table 3. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over 802.11 for different number of modified resources. It can be seen from Figure 7, that the Power-Aware HTTP consumes marginally less power than the Regular HTTP in case the number of modified resources are less. The actual power consumption may be less or more depending on the network conditions but our solution will always perform better(except the worst case) since the number of requests made are less. Again assuming the probability of a resource being modified to be 1/2 our solution showed an improvement in power consumption by 12.4\%.
+Table 3. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over 802.11 for different number of modified resources. It can be seen from Figure 6, that the Power-Aware HTTP consumes marginally less power than the Regular HTTP in case the number of modified resources are less. The actual power consumption may be less or more depending on the network conditions but our solution will always perform better(except the worst case) since the number of requests made are less. Again assuming the probability of a resource being modified to be 1/2 our solution showed an improvement in power consumption by 12.4\%.
 
 
-Note that the relative improvement of Power-Aware HTTP is significantly less in 802.11 than the cellular network since in cellular the radio stays in high power mode for the duration during which the transfer is taking place as shown in Figure 9. 802.11 is much more power efficient than the cellular and it can be seen in Figure 10. that the power consumption during the ideal period goes down in case of 802.11
+Note that the relative improvement of Power-Aware HTTP is significantly less in 802.11 than the cellular network since in cellular the radio stays in high power mode for the duration during which the transfer is taking place as shown in Figure 7. 802.11 is much more power efficient than the cellular and it can be seen in Figure 8. that the power consumption during the ideal period goes down in case of 802.11
 
 
 \begin{table}[htbp]
@@ -331,24 +327,6 @@ makes {\it n} GET requests whle power-aware HTTP makes {\it (1+n)} GET requests.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=80mm]{chrome}
-\caption{Chrome URL Pre-Fetch}
-\label{fig:sp_gd_mnist}
-\end{figure}
-
-
-
-\section{More Optimizations}
-
-We looked at some of the optimizations made by modern browsers. One of the optimizations done by Google Chrome to reduce latency is pre-fetching the URL before a user actually finishes typing the URL.
- 
-Server logs in the figure 8. shows that as soon as user starts typing, Chrome starts making HTTP requests for each typed character. This approach reduces latency but consumes a lot of power and wastes a lot of network resources. 
-
-Solution: We try to address this problem by making server give hint to client to prevent premature fetching of urls by modifying the response of 404. We return the possible URL options matching the pattern in an additional header field. In case of cellular network, we found that the energy consumption was less by 15.8\%.
-
-
-\begin{figure}[ht!]
-\centering
 \includegraphics[width=80mm]{Cellular_combined.png}
 \caption{Power consumption pattern in Cellular network }
 \label{fig:sp_gd_mnist}
@@ -358,6 +336,26 @@ Solution: We try to address this problem by making server give hint to client to
 \centering
 \includegraphics[width=80mm]{Wifi_combined.png}
 \caption{Power consumption pattern in 802.11}
+\label{fig:sp_gd_mnist}
+\end{figure}
+
+
+
+\section{More Optimizations}
+
+We looked at some of the optimizations made by modern browsers. One of the optimizations done by Google Chrome to reduce latency is pre-fetching the URL before a user actually finishes typing the URL.
+ 
+Server logs in the figure 9. shows that as soon as user starts typing, Chrome starts making HTTP requests for each typed character. This approach reduces latency but consumes a lot of power and wastes a lot of network resources. 
+
+Solution: We try to address this problem by making server give hint to client to prevent premature fetching of urls by modifying the response of 404. We return the possible URL options matching the pattern in an additional header field. In case of cellular network, we found that the energy consumption was less by 15.8\%.
+
+
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{chrome}
+\caption{Chrome URL Pre-Fetch}
 \label{fig:sp_gd_mnist}
 \end{figure}
 

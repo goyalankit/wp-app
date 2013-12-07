@@ -91,7 +91,7 @@ The field of wireless communication has seen tremendous progress in recent years
 
 In this context, we first try to pinpoint the part of the HTTP protocol which leads to power consumption. We then make changes to the configurable server side properties including timeout, keepalive values etc. to analyze the level of impact these parameters have on the power consumption and finally, propose a power aware HTTP protocol that can optimize the power consumption of HTTP.
 
-The rest of this paper is organized as follows: Section 2 highlights the background and related works of hypertext transfer protocol, transmission control protocol and power consumption issues over HTTP. Section 3 highlights the motivation behind this paper. Section 4 presents our proposed implementation of a power aware HTTP. Section 5 outlines the challenges faced during the course of the implementation. Section 6 outlines the results of our implementaion. Section 7 lists some other optimizations to optimize the power consumption of HTTP. Section 8 discusses related works. Section 9 includes our concluding remarks. Section 10 discusses the future work in the context of power optimziation of HTTP. Section 11 lists the references.
+The rest of this paper is organized as follows: Section 2 highlights the background and related works of hypertext transfer protocol, transmission control protocol and power consumption issues over HTTP. Section 3 highlights the motivation behind this paper. Section 4 gives an overview of our proposal. Section 5 presents our proposed implementation of a power aware HTTP. Section 6 outlines the challenges faced during the course of the implementation. Section 7 describes the results of our implementaion. Section 8 lists some other optimizations to optimize the power consumption of HTTP. Section 9 discusses related works. Section 10 includes our concluding remarks. Section 11 discusses the future work in the context of our work and power optimziation of HTTP.
 
 \section{Background}
 
@@ -103,9 +103,10 @@ The HTTP protocol follows a client server model where a request (in simple ASCII
 
 HTTP utilizes TCP for reliable transfer of information over the internet. To analyze the power consumption model of HTTP, it is relevant to give a brief overview of the TCP connection establishment and teardown.
 
-
 \subsection{TCP Protocol Overview}
+
 \subsubsection{Connection Establishment}
+
 For a client to establish a TCP connection with a server, the client must send a SYN and receive an ACK for it from the server. Thus, conceptually, there should be four control messages passed between the devices. However, it's inefficient to send a SYN and an ACK in separate messages when both of these can be communicated simultaneously. Thus, in the normal sequence of events in connection establishment, one of the SYNs and one of the ACKs are sent together by setting both of the relevant bits (a message sometimes called a SYN+ACK). This makes a total of three messages, and is called a three-way handshake.
 
 \subsubsection{Connection Teardown}
@@ -193,8 +194,7 @@ We implemented our proposal at the application layer, and tested its performance
 
 An additional header field {\it check-resource} is added to the single GET request made by the client. The value of this field will be set to a list of key-value pairs of the resource-url and the corresponding MD5 hash. When the client receives the modified/not modified status of the individual resources from the server's response header, it will then make GET requests for only those resources that have not been modified.
 
-We implemented a native android application (shown in Figure 4.) that allowed us to make a single GET request for multiple resources using the new \it{check-resource} \rm header field.
-
+We implemented a native android application that allowed us to make a single GET request for multiple resources using the new \it{check-resource} \rm header field.
 
 \subsection{Server}
 
@@ -207,18 +207,15 @@ The components used for the implementation are listed below.
 
 \subsubsection{Hardware}
 
-\noindent1. Power Monitor by Monsoon Solutions (Figure 5) \newline
+\noindent1. Power Monitor by Monsoon Solutions (Figure 4) \newline
 2. Mobile Device: HTC desire one running Android 4.2.2
 
 \subsubsection{Software}
 
-1. Application: Native android application
-
-2. Servers: Apache Tomcat, Web-brick
-
-3. Framework: Sinatra
-
-4. Analysis: Matlab
+1. Application: Native android application\newline
+2. Servers: Apache Tomcat, Web-brick\newline
+3. Framework: Sinatra\newline
+4. Analysis: Matlab\newline
 
 \begin{figure}[ht!]
 \centering
@@ -230,22 +227,21 @@ The components used for the implementation are listed below.
 \section{ Challenges}
 
 While measuring power for different HTTP requests, a lot of spikes were observed in the power consumption graph which were not related to HTTP, since the connection was either in an idle state or the HTTP request had been completed. These could have happened due to the following reasons: \\
-a) Different browsers have different power consumptions and have different scheduling policy to fetch the results. For example, Google Chrome starts fetching a page as soon as you start typing the URL which may require additional processing and thus add to the power consumption.
-\it{Solution:} \rm To address this, we created an Android app that allowed us to make HTTP calls with custom headers for various scenarios eliminating any power consumption due to rendering or other optimizations. All the HTTP connections were reused and the persistence of a connection was controlled from the server side by setting the KeepAlive flags.
+a) Different browsers have different power consumptions and have different scheduling policy to fetch the results. For example, Google Chrome starts fetching a page as soon as you start typing the URL which may require additional processing and thus adds to the power consumption\newline
+\it{Solution} \rm: To address this, we created an Android app that allowed us to make HTTP calls with custom headers for various scenarios eliminating any power consumption due to rendering or other optimizations. All the HTTP connections were reused and the persistence of a connection was controlled from the server side by setting the KeepAlive flags.
 
-b) There are lot of background processes in an Android device that consume power and it becomes difficult to know whether the power spikes are due to the monitored HTTP calls or due to other processes in the system.
-\it{Solution:} \rm To alleviate the effect of other applications, we considered the average power consumption over several readings. We also subtracted the baseline from the original signal to mitigate the effects of continuously running background processes. We applied the Butterworth low-pass filter to mitigate the interference of high frequency noise.
-
+b) There are lot of background processes in an Android device that consume power and it becomes difficult to know whether the power spikes are due to the monitored HTTP calls or due to other processes in the system\newline
+\it{Solution} \rm: To alleviate the effect of other applications, we considered the average power consumption over several readings. We also subtracted the baseline from the original signal to mitigate the effects of continuously running background processes. We applied the Butterworth low-pass filter to mitigate the interference of high frequency noise.
 
 \section{Results}
-We evaluated the performance of Regular HTTP and Power-Aware HTTP over 802.11 and Cellular network for different number of modified resources.  
+We evaluated the performance of Regular HTTP and Power-Aware HTTP over 802.11 and Cellular networks for different number of modified resources.  
 
-\subsection{Power consumption in Cellular}
-Table 2. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over a cellular network for different number of modified resources. It can be seen from Figure 5, that the Power-Aware HTTP consumes much less power than the Regular HTTP in case the number of modified resources are less. Our solution performs worse than Regular HTTP only in case when all the resources are modified, but in a typical webpage this is not a common scenario as seen in Table 1. In our experiments we observed an average improvement of 112.3\% in power consumption assuming probability of a resource being modified to be 1/2 for all the 10 resources we tested for.
+\subsection{Power Consumption in Cellular}
+Table 2 shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over a cellular network for different number of modified resources. It can be seen from Figure 5 that Power-Aware HTTP consumes much less power than the Regular HTTP in case the number of modified resources are less. Our solution performs worse than Regular HTTP only when all the resources are modified, but in a typical webpage this is not a common scenario (as seen in Table 1). In the course of our experiments, we observed an average improvement of 112.3\% in power consumption assuming the probability of a resource being modified to be 1/2 for all the 10 resources that we tested for.
 
 \begin{table}[htbp]
 \centering
-\caption{Power consumption in mJ for different HTTP implementations.}
+\caption{Power consumption (in mJ) in Cellular}
 \begin{tabular}{|r|r|r|r|}
 \hline
 \multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{Power-Aware HTTP} & \multicolumn{1}{l|}{Regular HTTP} & \multicolumn{1}{l|}{Difference} \\ \hline
@@ -258,8 +254,6 @@ Table 2. shows the average energy consumed by both Power-Aware HTTP and Regular 
 \label{}
 \end{table}
 
-
-
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=80mm]{avg_energy_cell.png}
@@ -268,15 +262,13 @@ Table 2. shows the average energy consumed by both Power-Aware HTTP and Regular 
 \end{figure}
 
 \subsection{Power consumption in 802.11}
-Table 3. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over 802.11 for different number of modified resources. It can be seen from Figure 6, that the Power-Aware HTTP consumes marginally less power than the Regular HTTP in case the number of modified resources are less. The actual power consumption may be less or more depending on the network conditions but our solution will always perform better(except the worst case) since the number of requests made are less. Again assuming the probability of a resource being modified to be 1/2 our solution showed an improvement in power consumption by 12.4\%.
+Table 3 shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over 802.11 for different number of modified resources. It can be seen from Figure 6 that Power-Aware HTTP consumes marginally less power than the Regular HTTP in case the number of modified resources are less. The actual power consumption may be less or more depending on the network conditions but our solution will always perform better(except the worst case) since the number of requests made are less. Again assuming the probability of a resource being modified to be 1/2, our solution showed an improvement in power consumption by 12.4\%.
 
-
-Note that the relative improvement of Power-Aware HTTP is significantly less in 802.11 than the cellular network since in cellular the radio stays in high power mode for the duration during which the transfer is taking place as shown in Figure 7. 802.11 is much more power efficient than the cellular and it can be seen in Figure 8. that the power consumption during the ideal period goes down in case of 802.11
-
+Note that the relative improvement of Power-Aware HTTP is significantly less in 802.11 than the cellular network since in cellular networks, the radio stays in high power mode for the duration during which the transfer is taking place as shown in Figure 7. 802.11 is much more power efficient than the cellular network. It can be inferrred from Figure 8 that the power consumption during the ideal period goes down in case of 802.11.
 
 \begin{table}[htbp]
 \centering
-\caption{Power consumption in wifi}
+\caption{Power consumption (in mJ) in 802.11}
 \begin{tabular}{|r|r|r|r|}
 \hline
 \multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{Regular HTTP} & \multicolumn{1}{l|}{Power-Aware HTTP} & \multicolumn{1}{l|}{Difference} \\ \hline
@@ -297,25 +289,18 @@ Note that the relative improvement of Power-Aware HTTP is significantly less in 
 \end{figure}
 
 
-
-
 \subsection{Best Case}
 
 In this more likely case, for a cached webpage with n resources, out of which m (m \textless \textless n) resources have been modified: regular HTTP makes {\it n} GET requests. Power-aware HTTP, on the other hand, makes {\it (1+m)} GET requests.
 
-
-
 \subsection{Worst Case}
 
-For a cached webpage with n resources, out of which all n resources have been modified, regular HTTP
-makes {\it n} GET requests whle power-aware HTTP makes {\it (1+n)} GET requests.
-
-
+For a cached webpage with n resources, out of which all n resources have been modified, regular HTTP makes {\it n} GET requests whle power-aware HTTP makes {\it (1+n)} GET requests.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=80mm]{Cellular_combined.png}
-\caption{Power consumption pattern in Cellular network }
+\caption{Power consumption pattern in a Cellular network }
 \label{fig:sp_gd_mnist}
 \end{figure}
 
@@ -327,17 +312,13 @@ makes {\it n} GET requests whle power-aware HTTP makes {\it (1+n)} GET requests.
 \end{figure}
 
 
-
 \section{More Optimizations}
 
 We looked at some of the optimizations made by modern browsers. One of the optimizations done by Google Chrome to reduce latency is pre-fetching the URL before a user actually finishes typing the URL.
  
-Server logs in the figure 9. shows that as soon as user starts typing, Chrome starts making HTTP requests for each typed character. This approach reduces latency but consumes a lot of power and wastes a lot of network resources. 
+Server logs in Figure 9 shows that as soon as the user starts typing, Chrome starts making HTTP requests for each typed character. This approach reduces latency but consumes a lot of power and wastes a lot of network resources. 
 
-Solution: We try to address this problem by making server give hint to client to prevent premature fetching of urls by modifying the response of 404. We return the possible URL options matching the pattern in an additional header field. In case of cellular network, we found that the energy consumption was less by 15.8\%.
-
-
-
+\it{Solution} \rm: We try to address this problem by making the server give hints to the client to prevent premature fetching of urls (by modifying the response of 404). We return the possible URL options matching the pattern in an additional header field. In case of a cellular network, we found that the energy consumption was less by 15.8\%.
 
 \begin{figure}[ht!]
 \centering
@@ -346,11 +327,9 @@ Solution: We try to address this problem by making server give hint to client to
 \label{fig:sp_gd_mnist}
 \end{figure}
 
-
-
 \section{ Related Works}
 
-Other works that have tried to address the inefficiencies of HTTP include the work on improving HTTP latency by 22\% [1]. The authors propose two new HTTP request methods: GETALL and GETLIST to retrieve all the resources on a webpage with a single call. Authors in [1] doesn't consider the case when the webpage is cached and  we propose to have a cient query the server to check the resource change status and make subsequent GET requests for the modified resources based on the response from the server.
+Other works that have tried to address the inefficiencies of HTTP include the work on improving HTTP latency by 22\% [1]. The authors propose two new HTTP request methods: GETALL and GETLIST to retrieve all the resources on a webpage with a single call. The authors in [1] do not consider the case when the webpage is cached. We propose to have a cient query the server to check the resource change status and make subsequent GET requests for the modified resources based on the response from the server.
 
 Another work suggests the use of a web proxy to reduce power consumption by not waiting for requests on a WAN and the use of request pipelining to reduce the wait period [2].
 
@@ -358,18 +337,17 @@ Another work suggests the use of a web proxy to reduce power consumption by not 
 
 Power consumption in a resource-constrained device depends on a number of factors. In our approach, we have targeted novel means to reduce the number of HTTP requests. In the implentation of HTTP today, all the resources on a cached webpage are fetched using different HTTP connections which increases the number of round trips. We propose an extension to HTTP to reduce the number of requests. The proposed solution shows clear quantitative gains in reducing power consumption over the existing implementation of HTTP. 
 
-Our solution to have the server provide hints to the client to handle the pre-fetch url problem may not be the most optimal solution but we try to show that HTTP needs to be smart enough 	to accomodate optimizations aimed at improving performane.
+Our solution to have the server provide hints to the client to handle the pre-fetch url problem may not be the most optimal solution but we try to show that HTTP needs to be smart enough 	to accommodate optimizations that are aimed at improving performane.
 
-Standardization is necessary for the solution to work accross all browsers. The proposed solution cannot be used until all browsers provide the fucntionality to an HTTP GET request with the {\it check-reosurce} header. Different hosting services can provide this functionality if a standard is established.
+Standardization is necessary for the solution to work accross all browsers. The proposed solution cannot be used until all browsers provide the functionality to use the HTTP GET request method with the {\it check-resource} header. Different hosting services can provide this functionality if a standard is established.
 
 \section{Future Work}
 
-More robust analysis of the performance by taking power measurement readings over a period of normal usage. It would be interesting to see the performance on the desktop PCs since the work is equally applicable on all devices. 
+We plan to perform an even more robust analysis of the performance of our solution by taking power measurement readings over a period of normal usage. It would also be interesting to analyze the performance of our solution on desktop PCs since the work is equally applicable on all devices. 
 
 \acks
 
 We would like to take this opportunity to thank Prof. Lili Qiu for motivating us for the project and guiding us in the process.
-
 
 \bibliographystyle{abbrvnat}
 % The bibliography should be embedded for final submission.

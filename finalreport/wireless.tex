@@ -75,7 +75,7 @@
 \maketitle
 
 \begin{abstract}
-\noindent A major part of the Internet works on the HTTP protocol. Optimizations to the protocol have been suggested to improve the performance of the protocol. However, less attention has been paid to the power consumption aspect of the protocol which is bound to play a significant role in the coming years due to an increase in mobile devices which are constrained by limited power capabilities. In this paper, we first analyze where exactly the power is consumed, how configuration changes affect power consumption and then we propose a noval solution to reduce the power consumed by HTTP without compromising on performance. 
+\noindent A major part of the Internet works on the HTTP protocol. Optimizations to the protocol have been suggested to improve the performance of the protocol. However, less attention has been paid to the power consumption aspect of the protocol which is bound to play a significant role in the coming years due to an increase in mobile devices which are constrained by limited power capabilities. In this paper, we first analyze where exactly the power is consumed, how configuration changes affect power consumption and then we propose a novel solution to reduce the power consumed by HTTP without compromising on performance. 
 
 \end{abstract}
 
@@ -104,26 +104,24 @@ The HTTP protocol follows a client server model where a request (in simple ASCII
 HTTP utilizes TCP for reliable transfer of information over the internet. To analyze the power consumption model of HTTP, it is relevant to give a brief overview of the TCP connection establishment and teardown.
 
 
-
 \subsection{TCP Protocol Overview}
 \subsubsection{Connection Establishment}
-For a client to establish a TCP connection with a server, the client must send a SYN and receive an ACK for it from the server. Thus, conceptually, there should be four control messages passed between the devices. However, it's inefficient to send a SYN and an ACK in separate messages when one could communicate both simultaneously. Thus, in the normal sequence of events in connection establishment, one of the SYNs and one of the ACKs is sent together by setting both of the relevant bits (a message sometimes called a SYN+ACK). This makes a total of three messages, and is called a three-way handshake.
+For a client to establish a TCP connection with a server, the client must send a SYN and receive an ACK for it from the server. Thus, conceptually, there should be four control messages passed between the devices. However, it's inefficient to send a SYN and an ACK in separate messages when both of these can be communicated simultaneously. Thus, in the normal sequence of events in connection establishment, one of the SYNs and one of the ACKs are sent together by setting both of the relevant bits (a message sometimes called a SYN+ACK). This makes a total of three messages, and is called a three-way handshake.
 
 \subsubsection{Connection Teardown}
 Each side terminates its end of the connection by sending a special message with the FIN (finish) bit set. This message, sometimes called a FIN, serves as a connection termination request to the other device, while also possibly carrying data like a regular segment. The device receiving the FIN responds with an acknowledgment to the FIN to indicate that it was received. The connection as a whole is not considered terminated until both sides have finished the shut down procedure by sending a FIN and receiving an ACK.
-Thus, termination isn't a three-way handshake like establishment: it is a pair of two-way handshakes. The states that the two devices in the connection move through during a normal connection shutdown are different because the device initiating the shutdown must behave differently than the one that receives the termination request. In particular, the TCP on the device receiving the initial termination request must inform its application process and wait for a signal that the process is ready to proceed. The initiating device doesn't need to do this, since the application is what started the ball rolling in the first place.
+Thus, termination isn't a three-way handshake like establishment: it is a pair of two-way handshakes. The states that the two devices in the connection move through during a normal connection shutdown are different because the device initiating the shutdown must behave differently than the one that receives the termination request. In particular, the TCP on the device receiving the initial termination request must inform its application process and wait for a signal that the process is ready to proceed. The initiating device doesn't need to do this, since the application is what started the shutdown process in the first place.
 
 \subsection{Inefficiencies of HTTP}
-The HTTP protocol as it is implemented today has some notable inefficiencies. According to the current specification, while fetching a webpage using HTTP, explicit calls to the server are required to fetch individual resources on a webpage even though both client and server know that multiple resources need to be shared. In HTTP/1.0, a new conenction is established on every subsequent request(Every such call requires the setup of a new TCP connection.). This increase in the number of calls to the server adds to the power consumption and latency. However this was changed in the specification of HTTP/1.1. Modern browsers try to  optimize this problem by maintaining "persistent" connections and pipelining requests. Also, HTTP does not  impose any requirements on data compression. 
-
+The HTTP protocol as it is implemented today has some notable inefficiencies. According to the current specification, while fetching a webpage using HTTP, explicit calls to the server are required to fetch individual resources on a webpage even though both client and server know that multiple resources need to be shared. In HTTP/1.0, a new conenction is established on every subsequent request (Every such call requires the setup of a new TCP connection). This increase in the number of calls to the server adds to the power consumption and latency. However, this was changed in the specification of HTTP/1.1. Modern browsers try to  optimize this problem by maintaining "persistent" connections and pipelining requests. Also, HTTP does not  impose any requirements on data compression. 
 
 \subsection{Power Consumption in HTTP}
 
 \subsubsection{ Non Persistent HTTP Connections}
 
-In non-persistent HTTP connections, all the resources on a web page are fetched using different TCP connection. Since the client sets up a new TCP connection for every HTTP request number of requests are propotional to the number of resources on the page. A typical web page consists of lot of images and text, and all the resources are fetched using a different HTTP connection which increases the number of round trips. Each round trip requires allocation of new resources such as port numbers, bookkeeping data structures, etc. which leads to more processing power. Figure 1 shows the establishment of a new TCP connection to fetch each resource on a webpage.
+In non-persistent HTTP connections, all the resources on a webpage are fetched using different TCP connections. Since the client sets up a new TCP connection for every HTTP request, the number of requests are propotional to the number of resources on the page. A typical webpage consists of a number of images and text, and all the resources are fetched using a different HTTP connection which increases the number of round trips. Each round trip requires allocation of new resources such as port numbers, bookkeeping data structures, etc. which leads to more processing power. Figure 1 shows the establishment of a new TCP connection to fetch each resource on a webpage.
 
-Due to an increase in the effective number of requests the probability of collisions increase and TCP’s congestion response by slow start approach [2] leads to inefficient use of  the available network bandwidth. TCP does not reach full throughput until the effective congestion window size is at least the product of the round-trip delay and the available network bandwidth [1]. This means that slow start limits TCP throughput, which leads to more roundtrips and consequently higher power consumption.
+Due to an increase in the effective number of requests, the probability of collisions increases and TCP’s response to network congestion by the slow start approach [2] leads to inefficient use of the available network bandwidth. TCP does not reach full throughput until the effective congestion window size is at least the product of the round-trip delay and the available network bandwidth [1]. This means that slow start limits TCP throughput, which leads to more roundtrips and consequently higher power consumption.
 
 \begin{figure}[ht!]
 \centering
@@ -132,32 +130,27 @@ Due to an increase in the effective number of requests the probability of collis
 \label{fig:sp_gd_mnist}
 \end{figure}
 
-
-
-
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=80mm]{powerconsumption1.png}
-\caption{Persistent HTTP Connection on 802.11 }
+\caption{Persistent HTTP Connection on 802.11}
 \label{fig:sp_gd_mnist}
 \end{figure}
 
-
 \subsubsection{Persistent HTTP Connections}
 
-In a persistent HTTP connection, a single TCP connection is used to send and receive multiple web requests using the keep-alive header field. which eliminates the need of establishment of new TCP connection to fetch each resource. This reduces the number of effective calls. As corroborated by our experiments power consumption is directly propotional to the number of requests made. Figure 2 shows that all the resources are fetched using a single TCP connection. On 802.11, comparing the average energy consumed by non-persistant connection we found it to be 11.8\% more than that consumed by persistent connections.
+In a persistent HTTP connection, a single TCP connection is used to send and receive multiple web requests and responses using the keep-alive header field. This eliminates the need for establishment of a new TCP connection to fetch each resource which in turn reduces the number of effective calls. As corroborated by our experiments, power consumption is directly propotional to the number of requests made. Figure 2 shows all the resources being fetched using a single TCP connection. The average energy consumed by non-persistent connections in 802.11 was found to be 11.8\% more than that consumed by persistent connections.
 
-However in practice each server has a limit on number of concurrent HTTP connections it can keep, we need to find an optimal time period to keep the TCP connection open given variables like content-length of the data being exchanged. Moreover keeping connections open on a cellular network may not be the most optimcal strategy since a client (unnecessarily) remains in a high power consumption state during that period as seen in Figure 3. 
+However, in practice, each server has an upper limit on the number of concurrent HTTP connections it can keep open. Wwe need to find an optimal time period to keep a TCP connection open given variables like content-length of the data being exchanged. Moreover, keeping connections open on a cellular network may not be the most optimcal strategy since a client (unnecessarily) remains in a high power consumption state during that period as seen in Figure 9. 
 
 \section{Motivation}
-The effect of an increase in the number of calls to the server is more severe in resource-constrained devices. Since the power consumption increases with the number of requests made, we focus on novel methods to reduce the number of HTTP requests made by a webpage.
+The increase in the number of effective calls has a severe impact on the battery life of resource-constrained devices. Since the power consumption increases with the number of requests made, we focus on novel methods to reduce the number of HTTP requests made by a webpage.
 
-Today, websites try to reduce latency and power consumption by caching various resources. However, client need to check with the server about the freshness of the resources. Typically conditional HTTP enabled by {\it If-Modified-Since} and {\it If-None-Match} header fields are used by clients to check the validity of cache; where resource is returned only if it has been changed on the server otherwise a status code of 304 (not modified) in response will be returned without any message-body. 
+Today, websites try to reduce latency and power consumption by caching various resources. However, clients need to check with the server about the freshness of the resources on a webpage. Typically, conditional HTTP enabled by {\it If-Modified-Since} and {\it If-None-Match} header fields are used by clients to check the validity of the cache. For such requests, a resource is returned only if it has been changed on the server otherwise a status code of 304 (not modified) will be returned without any message-body. 
 
 In HTTP/1.1, to load a cached webpage, the number of conditional GET requests equals the number of resources. For resources that are not modified often, this is an unnecessary overhead.
 
-Table 1. shows the number of unmodified resources relative to the total requests made by the 10 most popular websites based on the study by Alexa Internet (which ranks webistes based on page views and unique site users.)
-It can be seen that a majority of the resources on most of these cached webpages were seldom modified and unnecessary HTTP calls are being made to server to check the freshness of resources.
+Table 1 shows the number of unmodified resources relative to the total requests made by the 10 most popular websites based on a study by Alexa Internet (which ranks webistes based on page views and unique site users). It can be seen that a majority of the resources on most of these cached webpages are seldom modified and unnecessary HTTP calls are being made to the server to check the freshness of resources.
 
 \begin{table}[htbp]
 \centering
@@ -181,10 +174,9 @@ Amazon & 215 & 190 \\ \hline
 
 \section{Proposal}
 
-In pratice majority of resources on a website change infrequently and we try to reduce the number of conditional requests required to check whether the resource has been modified or not. For a page that is loaded from the cache, we propose \it{Power-Aware HTTP} \rm  a noval extension to HTTP which involves the addition of two new header fields to the HTTP GET request method - \bf{check-resource} \rm and \bf{resource-status} \rm. These headers will enable a client to check the status of multiple resource in a single web request.  
+In pratice, a majority of resources on a website change infrequently. We try to reduce the number of conditional requests required to check whether the resource has been modified or not. For a page that is loaded from the cache, we propose \it{Power-Aware HTTP} \rm , a novel extension to HTTP which involves the addition of two new header fields to the HTTP GET request method - \bf{check-resource} \rm and \bf{resource-status} \rm. These headers will enable a client to check the status of multiple resources in a single web request and a server to respond with a single bitmap containing the resource change status of multiple resources.
 
-As shown in Figure 3., the header \it{check-resource} \rm header will allow a client to pass MD5 hash values for multiple resources and \it{resource-status} \rm will allow the server to send the validity information for multiple resources. Basically when a cached webpage is to be loaded, a single GET request will be made which will contain the MD5 hash of all the resources on the page. The server uses MD5 hash to match resources and checks whether the resources have been modified (one-by-one) and returns the status (modified/not modified) for every resource to the client. The client then makes GET requests for only the resources that have been modified.
-
+As shown in Figure 3, the \it{check-resource} \rm header field will allow a client to pass MD5 hash values for multiple resources to the server and the \it{resource-status} \rm header field will allow the server to send the validity information for multiple resources to the client. To summarize, when a cached webpage is to be loaded, a single GET request will be made by the client, which will contain the MD5 hash of all the resources on the page. The server uses the MD5 hash to match resources and check whether the resources have been modified (one-by-one) or not. The server then returns the status (modified/not modified) for every resource to the client. The client then makes GET requests for only those resources that have been modified.
 
 \begin{figure}[ht!]
 \centering
@@ -193,33 +185,30 @@ As shown in Figure 3., the header \it{check-resource} \rm header will allow a cl
 \label{fig:sp_gd_mnist}
 \end{figure}
 
-
-
 \section{Implementation}
 
-We implemented our proposal at the application layer, and tested its performance over wifi and cellular network (3G).
+We implemented our proposal at the application layer, and tested its performance over wifi and cellular networks (3G).
 
 \subsection{Client}
 
-An additional header field {\it check-resource} is added to the single GET request made by the client. 
-The value of this field will be set to a list of key-value pairs of the resource-url and the corresponding MD5 hash.  When the client receives the modified/not modified status of the individual resources from the server's response header, it will then make GET requests for only those resources that have not been modified.
+An additional header field {\it check-resource} is added to the single GET request made by the client. The value of this field will be set to a list of key-value pairs of the resource-url and the corresponding MD5 hash. When the client receives the modified/not modified status of the individual resources from the server's response header, it will then make GET requests for only those resources that have not been modified.
 
-We implemented a native android application (shown in figure 4.) that allowed us to make a request for multiple resources with the new header, \it{check-resource} \rm. 
+We implemented a native android application (shown in Figure 4.) that allowed us to make a single GET request for multiple resources using the new \it{check-resource} \rm header field.
 
 
 \subsection{Server}
 
-The server responds with an additional response header {\it resource-status} which is a bitmap containing the modified/not modified status of every resource on the webpage. 
+The server responds with an additional response header field ({\it resource-status}),  which is set to a bitmap containing the modified/not modified status of every resource on the webpage. 
 
-We used ruby framework caleld Sinatra, which allowed us to add the middleware to intercept the conditinal request and add a new header field to the response header of Web-brick server.
+We used a Ruby framework called Sinatra, which allowed us to add a middleware to intercept the conditional request and add a new header field to the response header of the Web-brick server.
 
 \subsection{Technical Setup}
 The components used for the implementation are listed below.
 
 \subsubsection{Hardware}
 
-\noindent1. Power Monitor by Monsoon Solutions. \newline
-2. Mobile Device: HTC desire one running Android 4.2.2 
+\noindent1. Power Monitor by Monsoon Solutions (Figure 5) \newline
+2. Mobile Device: HTC desire one running Android 4.2.2
 
 \subsubsection{Software}
 
@@ -234,11 +223,9 @@ The components used for the implementation are listed below.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=70mm]{monitor.jpg}
-\caption{Monsoon Solutions’ Power Monitor and PowerTool software were used to capture power measurements for HTTP interactions on the Android device. }
+\caption{Monsoon Solutions’ Power Monitor and PowerTool software were used to capture power measurements for HTTP interactions on the Android device.}
 \label{fig:sp_gd_mnist}
 \end{figure}
-
-
 
 \section{ Challenges}
 

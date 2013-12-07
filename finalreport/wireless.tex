@@ -264,7 +264,7 @@ b) There are lot of background processes in an Android device that consume power
 We evaluated the performance of Regular HTTP and Power-Aware HTTP over 802.11 and Cellular network for different number of modified resources.  
 
 \subsection{Power consumption in Cellular}
-Table 2. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over a cellular network for different number of modified resources. It can be seen from Figure 6, that the Power-Aware HTTP consumes much less power than the Regular HTTP in case the number of modified resources are less. Our solution performs worse than Regular HTTP only in case when all the resources are modified, but in a typical webpage this is not a common scenario.
+Table 2. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over a cellular network for different number of modified resources. It can be seen from Figure 6, that the Power-Aware HTTP consumes much less power than the Regular HTTP in case the number of modified resources are less. Our solution performs worse than Regular HTTP only in case when all the resources are modified, but in a typical webpage this is not a common scenario as seen in Table 1. In our experiments we observed an average improvement of 112.3\% in power consumption assuming probability of a resource being modified to be 1/2 for all the 10 resources we tested for.
 
 \begin{table}[htbp]
 \centering
@@ -291,7 +291,10 @@ Table 2. shows the average energy consumed by both Power-Aware HTTP and Regular 
 \end{figure}
 
 \subsection{Power consumption in 802.11}
-Table 3. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over 802.11 for different number of modified resources. It can be seen from Figure 7, that the Power-Aware HTTP consumes marginally less power than the Regular HTTP in case the number of modified resources are less. The actual power consumption may be less or more depending on the network conditions but our solution will always perform better(except the worst case) since the number of requests made are less.
+Table 3. shows the average energy consumed by both Power-Aware HTTP and Regular HTTP over 802.11 for different number of modified resources. It can be seen from Figure 7, that the Power-Aware HTTP consumes marginally less power than the Regular HTTP in case the number of modified resources are less. The actual power consumption may be less or more depending on the network conditions but our solution will always perform better(except the worst case) since the number of requests made are less. Again assuming the probability of a resource being modified to be 1/2 our solution showed an improvement in power consumption by 12.4\%.
+
+
+Note that the relative improvement of Power-Aware HTTP is significantly less in 802.11 than the cellular network since in cellular the radio stays in high power mode for the duration during which the transfer is taking place as shown in Figure 9. 802.11 is much more power efficient than the cellular and it can be seen in Figure 10. that the power consumption during the ideal period goes down in case of 802.11
 
 
 \begin{table}[htbp]
@@ -336,6 +339,8 @@ In this more likely case, for a cached webpage with n resources, out of which m 
 For a cached webpage with n resources, out of which all n resources have been modified, regular HTTP
 makes {\it n} GET requests whle power-aware HTTP makes {\it (1+n)} GET requests.
 
+
+
 \section{More Optimizations}
 
 We looked at some of the optimizations made by modern browsers. One of the optimizations done by Google Chrome to reduce latency is pre-fetching the URL before a user actually finishes typing the URL.
@@ -370,7 +375,6 @@ Another work suggests the use of a web proxy to reduce power consumption by not 
 \section{Conclusions}
 
 Power consumption in a resource-constrained device depends on a number of factors. In our approach, we have targeted novel means to reduce the number of HTTP requests. In the implentation of HTTP today, all the resources on a cached webpage are fetched using different HTTP connections which increases the number of round trips. We propose an extension to HTTP to reduce the number of requests. The proposed solution shows clear quantitative gains in reducing power consumption over the existing implementation of HTTP. 
-
 
 Our solution to have the server provide hints to the client to handle the pre-fetch url problem may not be the most optimal solution but we try to show that HTTP needs to be smart enough 	to accomodate optimizations aimed at improving performane.
 
